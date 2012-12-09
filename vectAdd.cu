@@ -33,16 +33,16 @@ int main(int argc, char ** argv) {
     wbLog(TRACE, "The input length is ", inputLength);
 
     wbTime_start(GPU, "Allocating GPU memory.");
-
-    cudaMalloc((void **) &deviceInput1, &inputLength);
-    cudaMalloc((void **) &deviceInput2, &inputLength);
-    cudaMalloc((void **) &deviceOutput, &inputLength);
+    int inputSize = inputLength * sizeof(float);
+    cudaMalloc((void **) &deviceInput1, inputSize);
+    cudaMalloc((void **) &deviceInput2, inputSize);
+    cudaMalloc((void **) &deviceOutput, inputSize);
 
     wbTime_stop(GPU, "Allocating GPU memory.");
 
     wbTime_start(GPU, "Copying input memory to the GPU.");
-    cudaMemcpy(deviceInput1, hostInput1, inputLength, cudaMemcpyHostToDevice);
-    cudaMemcpy(deviceInput2, hostInput2, inputLength, cudaMemcpyHostToDevice);
+    cudaMemcpy(deviceInput1, hostInput1, inputSize, cudaMemcpyHostToDevice);
+    cudaMemcpy(deviceInput2, hostInput2, inputSize, cudaMemcpyHostToDevice);
 
     wbTime_stop(GPU, "Copying input memory to the GPU.");
 
@@ -57,7 +57,7 @@ int main(int argc, char ** argv) {
     wbTime_stop(Compute, "Performing CUDA computation");
 
     wbTime_start(Copy, "Copying output memory to the CPU");
-    cudaMemcpy(hostOutput, deviceOutput, inputLength, cudaMemcpyDeviceToHost);
+    cudaMemcpy(hostOutput, deviceOutput, inputSize, cudaMemcpyDeviceToHost);
 
     wbTime_stop(Copy, "Copying output memory to the CPU");
 
