@@ -32,9 +32,11 @@ int main(int argc, char ** argv) {
 
     wbLog(TRACE, "The input length is ", inputLength);
 
-	wbTime_start(GPU, "Allocating GPU memory.");
-    //@@ Allocate GPU memory here
+    wbTime_start(GPU, "Allocating GPU memory.");
 
+    cudaMalloc((void **) &deviceInput1, &inputLength);
+    cudaMalloc((void **) &deviceInput2, &inputLength);
+    cudaMalloc((void **) &deviceOutput, &inputLength);
 
     wbTime_stop(GPU, "Allocating GPU memory.");
 
