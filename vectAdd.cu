@@ -51,7 +51,7 @@ int main(int argc, char ** argv) {
     struct dim3 DimBlock(blockSize, 1, 1);
 
     wbTime_start(Compute, "Performing CUDA computation");
-    vecAdd<<DimGrid, DimBlock>>(deviceInput1, deviceInput2, deviceOutput, inputLength);
+    vecAdd<<<DimGrid, DimBlock>>>(deviceInput1, deviceInput2, deviceOutput, inputLength);
 
     cudaThreadSynchronize();
     wbTime_stop(Compute, "Performing CUDA computation");
