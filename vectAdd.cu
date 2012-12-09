@@ -8,7 +8,7 @@
 __global__ void vecAdd(float * in1, float * in2, float * out, int len) {
   int idx = threadIdx.x + blockDim.x * blockIdx.x;
   if(idx < len) {
-    out[idx] = in1[idx] + in2[idx]
+    out[idx] = in1[idx] + in2[idx];
   }
 }
 
