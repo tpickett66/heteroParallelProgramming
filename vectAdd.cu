@@ -57,7 +57,7 @@ int main(int argc, char ** argv) {
     wbTime_stop(Compute, "Performing CUDA computation");
 
     wbTime_start(Copy, "Copying output memory to the CPU");
-    //@@ Copy the GPU memory back to the CPU here
+    cudaMemcpy(hostOutput, deviceOutput, inputLength, cudaMemcpyDeviceToHost);
 
     wbTime_stop(Copy, "Copying output memory to the CPU");
 
