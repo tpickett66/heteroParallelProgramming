@@ -46,9 +46,9 @@ int main(int argc, char ** argv) {
 
     wbTime_stop(GPU, "Copying input memory to the GPU.");
 
-    //@@ Initialize the grid and block dimensions here
-
-
+    int blockSize = 256;
+    struct dim3 DimGrid((inputLength - 1)/blockSize + 1, 1, 1);
+    struct dim3 DimBlock(blockSize, 1, 1);
 
     wbTime_start(Compute, "Performing CUDA computation");
     //@@ Launch the GPU Kernel here
