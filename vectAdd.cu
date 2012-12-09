@@ -6,7 +6,7 @@
 //#include	<wb.h>
 
 __global__ void vecAdd(float * in1, float * in2, float * out, int len) {
-  int idx = threadId.x + blockDim.x * blockIdx.x;
+  int idx = threadIdx.x + blockDim.x * blockIdx.x;
   if(idx < len) {
     out[idx] = in1[idx] + in2[idx]
   }
