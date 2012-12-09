@@ -62,8 +62,9 @@ int main(int argc, char ** argv) {
     wbTime_stop(Copy, "Copying output memory to the CPU");
 
     wbTime_start(GPU, "Freeing GPU Memory");
-    //@@ Free the GPU memory here
-
+    cudaFree(deviceInput1);
+    cudaFree(deviceInput2);
+    cudaFree(deviceOutput);
 
     wbTime_stop(GPU, "Freeing GPU Memory");
 
